@@ -46,34 +46,34 @@ function BuildPlayersArray()
             if not PlayerResource:IsBroadcaster(playerID) then
 
                 local hero = PlayerResource:GetSelectedHeroEntity(playerID)
-				local teamname="North"
+				
+				local teamName="North"
 				if hero:GetTeamNumber()==DOTA_TEAM_GOODGUYS then
-					teamname="South"
+					teamName="South"
 				end
 				
 				local kickStatus="Active"
 				if storage:GetDisconnectState(playerID)~=0 then
-					kickStatus="kciked"
+					kickStatus="Kicked"
 				end
-				
-				
 				
                 table.insert(players, {
                     --steamID32 required in here
                     steamID32 = PlayerResource:GetSteamAccountID(playerID),
-					tm=teamname,
+		    tm=teamName,
                     -- Example functions of generic stats (keep, delete or change any that you don't need)
                     shp = storage:GetHeroName(playerID), --Hero by its short name
                     kls  = hero:GetKills(),   --Number of kills of this players hero
                     dth  = hero:GetDeaths(),  --Number of deaths of this players hero
-					 lvl = hero:GetLevel(),
-					afk = kickStatus,
+		    lvl = hero:GetLevel(),
+		    afk = kickStatus,
                     -- Item List
                     bo=storage:GetPlayerHist(playerID),
                 })
             end
         end
     end
-DeepPrintTable(players) 
+	DeepPrintTable(players) 
     return players
 end
+
